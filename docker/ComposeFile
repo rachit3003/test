@@ -1,1 +1,24 @@
 
+# This is test compose file
+
+version: "3"
+
+services:
+  testservice:
+    labels:
+      - "maintainer=Rachit Jha"
+      - "description=This is a test service"
+    image: rachit3003/rachitsrepository:centos
+    deploy:
+      mode: replicated
+      placement:
+        constraints:
+          - node.role==manager
+      replicas: 2
+    networks:
+      - test_overlay
+    ports:
+      - "1119:80"
+
+networks:
+  test_overlay:
